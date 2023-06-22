@@ -2,7 +2,6 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import seedRouter from './routes/seedRoutes.js';
 import productRouter from './routes/productRoutes.js';
 import userRouter from './routes/userRouters.js';
 import orderRouter from './routes/orderRoutes.js';
@@ -29,7 +28,6 @@ app.get('/api/keys/paypal', (req, res) => {
 });
 
 app.use('/api/upload', uploadRouter);
-app.use('/api/seed', seedRouter);
 app.use('/api/products', productRouter);
 app.use('/api/users', userRouter);
 app.use('/api/orders', orderRouter);
