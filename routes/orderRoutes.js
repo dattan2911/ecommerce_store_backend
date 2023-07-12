@@ -31,7 +31,12 @@ orderRouter.post(
             totalPrice: req.body.totalPrice,
             user: req.user._id,
         });
-
+        for (const index in newOrder.orderItems) {
+            const item = newOrder.orderItems[index];
+            const product = await Product.findById(item.product);
+            product.countInStock -= item.quantity;
+            await product.save();
+        }
         const order = await newOrder.save();
         res.status(201).send({ message: 'New Order Created', order });
     })
