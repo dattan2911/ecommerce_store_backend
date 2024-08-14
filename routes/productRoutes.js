@@ -23,7 +23,6 @@ productRouter.post(
       category: req.body.category,
       brand: req.body.brand,
       countInStock: req.body.countInStock,
-      rating: req.body.rating,
       numReviews: req.body.numReviews,
       description: req.body.description,
     });
