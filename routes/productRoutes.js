@@ -23,6 +23,8 @@ productRouter.post(
       category: req.body.category,
       brand: req.body.brand,
       countInStock: req.body.countInStock,
+      rating: 0,
+      numReviews: 0,
       description: req.body.description,
     });
     const product = await newProduct.save();
