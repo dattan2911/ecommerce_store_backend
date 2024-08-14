@@ -141,12 +141,12 @@ orderRouter.put(
                 update_time: req.body.update_time,
                 email_address: req.body.email_address,
             };
-            // for (const index in order.orderItems) {
-            //     const item = order.orderItems[index];
-            //     const product = await Product.findById(item.product);
-            //     product.countInStock -= item.quantity;
-            //     await product.save();
-            // }
+            for (const index in order.orderItems) {
+                const item = order.orderItems[index];
+                const product = await Product.findById(item.product);
+                product.countInStock -= item.quantity;
+                await product.save();
+            }
             const updatedOrder = await order.save();
             res.send({ message: 'Order Paid', order: updatedOrder });
         } else {
