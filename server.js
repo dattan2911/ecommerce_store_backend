@@ -35,7 +35,12 @@ app.use('/api/users', userRouter);
 app.use('/api/orders', orderRouter);
 
 app.use((err, req, res, next) => {
+  res.setHeader(
+    'Content-Security-Policy',
+    "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:;"
+  );
   res.status(500).send({ message: err.message });
+  next();
 });
 const port = process.env.PORT || 5000;
 app.listen(port, () => {

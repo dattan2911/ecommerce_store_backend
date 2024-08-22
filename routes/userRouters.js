@@ -90,10 +90,14 @@ userRouter.post(
 userRouter.post(
   '/signup',
   expressAsyncHandler(async (req, res) => {
+    const existedUser = await User.findOne({ email: req.body.email });
+    if (existedUser) {
+      return res.status(400).send({ message: 'Email already registered' });
+    }
     const newUser = new User({
       name: req.body.name,
       email: req.body.email,
-      password: bcrypt.hashSync(req.body.password),
+      password: bcrypt.hashSync(req.body.password, 8),
     });
     const user = await newUser.save();
     res.send({
