@@ -7,7 +7,10 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-const upload = multer();
+// const upload = multer();
+
+const storage = multer.memoryStorage()
+const upload = multer({ storage: storage })
 
 const uploadRouter = express.Router();
 
