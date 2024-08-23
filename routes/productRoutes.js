@@ -15,6 +15,10 @@ productRouter.post(
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
+    const existedProduct = await Product.findOne({ slug: req.body.slug });
+    if (existedProduct) {
+      return res.status(400).send({ message: 'Product already existed' });
+    }
     const newProduct = new Product({
       name: req.body.name,
       slug: req.body.slug,
